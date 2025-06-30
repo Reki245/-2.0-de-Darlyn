@@ -1,0 +1,157 @@
+Desarrolla una plataforma web full stack privada, moderna, automatizada y real para la empresa Manuchar Perú. Esta solución permitirá a la empresa gestionar de forma integral el voluntariado corporativo, la formación interna en liderazgo social, y la cultura de colaboración entre empleados, todo alineado con los ODS 8 (trabajo decente) y 17 (alianzas). La plataforma debe estar desplegada en Netlify, utilizar Supabase como backend real y tener el código gestionado en GitHub. No se permiten simulaciones.
+
+---
+
+✅ OBJETIVO GENERAL:
+Crear una plataforma robusta y automatizada que permita a Manuchar:
+- Gestionar usuarios mediante carga masiva desde Excel.
+- Asignar voluntariados reales en alianza con ONGs (vía IA).
+- Publicar Labs de voluntariado y Micro-Misiones internas.
+- Ofrecer formación interna en liderazgo por módulos.
+- Emitir certificados POAP reales o PDF firmados.
+- Usar dashboards y métricas reales para toma de decisiones.
+
+---
+
+🔐 ACCESO Y CREACIÓN DE USUARIOS (AUTOMATIZADO)
+
+- Solo los **administradores** pueden crear cuentas de empleados.
+- Se debe permitir subir un archivo **Excel (.xlsx)** con los campos:
+  - nombre completo
+  - correo electrónico
+  - sede
+  - cargo
+  - área
+  - número de celular
+- Al subir el archivo, el sistema debe:
+  - Leer y validar el archivo con la librería `xlsx` de Node.js.
+  - Crear automáticamente los usuarios en **Supabase Auth**.
+  - Generar contraseñas seguras aleatorias.
+  - Enviar las credenciales **por correo o WhatsApp** usando una API real (EmailJS, Resend o Supabase Edge Function con SMTP).
+
+---
+
+📥 ONBOARDING DEL EMPLEADO (OBLIGATORIO)
+
+- Al iniciar sesión por primera vez, el sistema debe:
+  1. Solicitar cambio de contraseña.
+  2. Guiar al usuario por un onboarding obligatorio donde completará:
+     - Perfil personal (intereses, habilidades, disponibilidad).
+     - Test de Fortalezas de Gallup (predefinido con puntajes).
+     - Test de Personalidad de Eysenck (EPI).
+
+---
+
+📂 TIPOS DE ACTIVIDADES (CATEGORIZACIÓN CLARA)
+
+1. 🧠 **Voluntariados con ONGs** (asignados por IA)
+   - Actividades organizadas junto a ONGs aliadas.
+   - Son asignadas mediante un motor de emparejamiento con lógica real de IA.
+   - Variables que debe considerar la IA:
+     - Resultados del test Gallup
+     - Tipo de personalidad (Eysenck)
+     - Áreas de interés social (educación, ambiente, salud)
+     - Disponibilidad horaria
+     - Sede del empleado
+   - Ejemplos: mentorías profesionales, alfabetización digital, talleres vocacionales.
+
+2. 🧪 **Labs de Voluntariado**
+   - Actividades breves, virtuales o exploratorias.
+   - No requieren IA.
+   - Se presentan como un catálogo abierto.
+   - Ejemplos: encuestas sociales, co-creación de soluciones, pruebas piloto comunitarias.
+
+3. 🧩 **Micro-Misiones**
+   - Acciones concretas y rápidas (1 a 3 horas) que pueden ejecutarse en pareja o de forma individual.
+   - Propuestas desde el área de RSE o por los propios empleados.
+   - Sistema de nominación: un colaborador puede invitar a otro y si ambos completan la actividad reciben reconocimiento doble.
+   - Ejemplos: pintar un colegio, entrega de kits, visitas a comedores, lectura infantil.
+
+---
+
+📊 DASHBOARD PERSONALIZADO DEL EMPLEADO
+
+- Al ingresar, el usuario ve:
+  - Sugerencias de voluntariado ONG (IA).
+  - Catálogo de Labs y Micro-Misiones disponibles.
+  - Indicadores personales:
+    - Horas acumuladas
+    - ODS impactados
+    - Badges obtenidos
+    - Nivel actual
+  - Historial de participación
+  - Certificados POAP descargables
+  - Posibilidad de nominar a un compañero
+  - Acceso a un chatbot con preguntas frecuentes (FAQ funcional)
+
+---
+
+🛠️ FUNCIONALIDADES DEL ADMINISTRADOR
+
+- Carga de usuarios por archivo Excel.
+- Gestión de:
+  - Voluntariados ONG
+  - Labs de voluntariado
+  - Micro-Misiones
+  - Talleres internos de liderazgo
+- Emisión automática de certificados (POAP o PDF descargable).
+- Creación de boletines con:
+  - Ranking de voluntarios por sede
+  - Historias de éxito de empleados
+  - Estadísticas y novedades trimestrales
+- Visualización de:
+  - Horas voluntariadas
+  - Participación por sede o departamento
+  - ODS impactados
+  - Competencias desarrolladas por actividad
+
+---
+
+🎓 MÓDULOS DE FORMACIÓN INTERNA
+
+- Incluye talleres virtuales o presenciales:
+  1. Autoliderazgo y propósito
+  2. Liderazgo colaborativo en entornos sociales
+  3. Innovación y liderazgo para el cambio
+- Relacionados directamente con la participación activa del empleado.
+- Participar en talleres desbloquea niveles, insignias y reconocimiento.
+
+---
+
+🏅 GAMIFICACIÓN Y RECONOCIMIENTO
+
+- Sistema de puntos, niveles e insignias.
+- Certificados con validez (PDF o POAP).
+- Ranking interno por sede, por equipo y por horas acumuladas.
+- Eventos gamificados colaborativos entre áreas.
+- Retroalimentación automática al terminar cada actividad (feedback sobre competencias desarrolladas).
+
+---
+
+📊 MÉTRICAS E INFORMES
+
+- Panel de métricas en tiempo real.
+- Informes exportables:
+  - Impacto por ODS
+  - Participación mensual/trimestral
+  - Actividades más populares
+  - Evaluación por tipo de actividad
+- Boletines automáticos cada 2 meses
+
+---
+
+🛡️ SEGURIDAD Y PRIVACIDAD
+
+- Cumplimiento con la Ley de Protección de Datos Personales (Perú).
+- Acceso solo para usuarios registrados por la empresa.
+- Toda la autenticación y autorización debe estar basada en roles usando Supabase Auth + RLS (Row-Level Security).
+- Rutas protegidas: panel admin separado del dashboard de empleados.
+
+---
+
+🚫 ACLARACIONES FINALES (MUY IMPORTANTES)
+
+- ❌ **No se permite ningún tipo de simulación** (“mock”, “demo”, “fake” o “placeholder”).
+- ✅ Todo debe estar funcional: carga Excel real, email real, autenticación real, IA funcional.
+- ✅ El backend debe estar conectado a **Supabase real** (no simulado).
+- ✅ El frontend debe estar listo para ser desplegado en **Netlify** y el código mantenido en **GitHub**.
